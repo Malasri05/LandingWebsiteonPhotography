@@ -1,0 +1,40 @@
+nav {
+    background-color: whitesmoke;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.logo {
+    width: 250px;
+    height: auto;
+}
+
+ul {
+    display: flex;
+    padding: 55px;
+}
+
+ul li {
+    font-size: 15px;
+    right: 0%;
+    list-style-type: none;
+    padding: 10px;
+}
+
+.at {
+    text-decoration: none;
+}
+
+.at:hover {
+    color: black;
+}

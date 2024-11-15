@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses</title>
+    <link rel="stylesheet" href="allCourse.css">
+    <link rel="stylesheet" href="fix.css">
+</head>
+<body>
+    <nav>
+        <img src="./image/logo.png" alt="Logo" class="logo" />
+        <ul>
+          <li><a href="allCourse.html" class="at">ALL COURSES</a></li>
+          <li><a href="signin.html" class="at">SIGN IN</a></li>
+        </ul>
+      </nav>
+  
+    <div id="all">
+        <div class="allcourse-Container">
+            <h1 class="course-title">Courses</h1>
+            <div class="filters">
+                <button onclick="filterCategory('All Courses')" class="filter-link">All Courses</button>
+                <button onclick="filterCategory('Books')" class="filter-link">Books</button>
+                <button onclick="filterCategory('Free')" class="filter-link">Free</button>
+                <button onclick="filterCategory('Workshops')" class="filter-link">Workshops</button>
+            </div>
+            <input type="text" id="searchInput" placeholder="Search by title, lessons, or category" class="search-bar" onkeyup="searchCourses()">
+            <div class="course-list" id="courseList"></div>
+        </div>
+        <footer class="footer">
+            <p class="copyright">© Copyright Key to Pictures 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        const courses = [
+            { title: 'The Complete Guide to Disney Castle Pics Made Easy', lessons: 27, price: '$39.00', categories: 'All Courses', image: './allcourseimage/image (1).png' },
+            { title: 'Ordinary to Extraordinary: Photography 201', lessons: 35, price: '$197.00', categories: 'All Courses, Workshops', image: './allcourseimage/image (2).png' },
+            { title: 'The Quick + Easy Beginner’s Course to Using Your DSLR Camera', lessons: 14, price: 'Free', categories: 'All Courses, Free', image: './allcourseimage/image (3).png' },
+            { title: 'Key to Photography 101: The Workshop', lessons: 11, price: '$97.00', categories: 'All Courses, Workshops', image: './allcourseimage/image (4).png' },
+            { title: 'Snap to Success : The Business of Photography 101', lessons: 17, price: '$197.00', categories: 'All Courses, Workshops', image: './allcourseimage/image (5).png' },
+            { title: 'Key To Taking Pictures Like A Professional Photographer - eBook', lessons: 1, price: '$19.99', categories: 'All Courses, Books', image: './allcourseimage/image (6).png' },
+            { title: 'The Key To Natural Posing - eBook', lessons: 1, price: '$19.99', categories: 'All Courses, Books', image: './allcourseimage/image (7).png' },
+            { title: 'Affiliate Program', lessons: 17, price: '$197.00', categories: 'All Courses, Workshops', image: './allcourseimage/image (8).png' },
+            { title: 'The Cheat Sheet to Disney Castle Pics Made Easy', lessons: 17, price: '$197.00', categories: 'All Courses, Workshops', image: './allcourseimage/image (1).png' }
+        ];
+
+        let filteredCourses = [...courses];
+        let selectedCategory = 'All Courses';
+        let searchTerm = '';
+
+        function displayCourses() {
+            const courseList = document.getElementById('courseList');
+            courseList.innerHTML = '';
+
+            filteredCourses.forEach(course => {
+                const courseElement = document.createElement('div');
+                courseElement.classList.add('course-card');
+                courseElement.innerHTML = `
+                    <div class="card-content">
+                        <h4 class="categories">${course.categories}</h4>
+                        <h2 class="title">${course.title}</h2>
+                        <div class="details">
+                            <span>${course.lessons} Lessons</span>
+                            <span class="separator">|</span>
+                            <span>${course.price}</span>
+                        </div>
+                    </div>
+                    <img src="${course.image}" alt="${course.title}" class="course-image" />
+                `;
+                courseList.appendChild(courseElement);
+            });
+
+            if (filteredCourses.length === 0) {
+                courseList.innerHTML = '<p>No courses found. Try adjusting your search or filter.</p>';
+            }
+        }
+
+        function filterCategory(category) {
+            selectedCategory = category;
+            filteredCourses = courses.filter(course =>
+                course.categories.includes(category) || category === 'All Courses'
+            );
+            displayCourses();
+        }
+
+        function searchCourses() {
+            searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            filteredCourses = courses.filter(course =>
+                course.title.toLowerCase().includes(searchTerm) ||
+                course.lessons.toString().includes(searchTerm) ||
+                course.categories.toLowerCase().includes(searchTerm)
+            );
+            displayCourses();
+        }
+
+        // Initial display of courses
+        displayCourses();
+    </script>
+</body>
+</html>
